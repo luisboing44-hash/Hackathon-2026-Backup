@@ -1,10 +1,10 @@
 # Hackathon-2026
 ICT-Event Kalkar: Projects, Notes etc.
 
-Rasperry:
+Rasperry Pi Information:
 
 Name: ProPi
 
-Benutzername: eighteen
+Username: eighteen
 
-Passwort: One 
+Password: One 
