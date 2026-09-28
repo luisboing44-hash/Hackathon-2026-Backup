@@ -13,6 +13,9 @@ Password: One
 
 
 Arduino RFID Reader:
+
 Card UID: 21 A6 1B 0A
+
 Card SAK: 08
+
 PICC type: MIFARE 1KB
