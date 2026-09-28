@@ -1,0 +1,80 @@
+SMARTRACK - ARDUINO DOKU
+========================
+
+Einrichtung am PC
+-----------------
+1. Arduino IDE installieren (arduino.cc/en/software)
+2. Treiber installieren: CP210x von Silicon Labs
+   (silabs.com -> "CP210x Universal Windows Driver")
+   Achtung: Unser Nano hat einen CP210x-Chip, KEINEN CH340.
+3. In der IDE einstellen:
+   - Board:     Arduino Nano
+   - Prozessor: ATmega328P
+   - Port:      COM8 (steht im Geraete-Manager)
+4. Bibliothek installieren: Werkzeuge -> Bibliotheken verwalten -> "MFRC522"
+
+
+Verkabelung RFID-Leser (RC522) -> Nano
+--------------------------------------
+Farbe    RC522    Nano
+Braun    SDA      D10
+Rot      SCK      D13
+Orange   MOSI     D11
+Gelb     MISO     D12
+Gruen    IRQ      frei lassen
+Blau     GND      GND
+Lila     RST      D9
+Grau     3.3V     3V3   (NICHT an 5V!)
+
+
+Verkabelung LEDs
+----------------
+D4 -> Widerstand (220 Ohm) -> gruene LED -> GND
+D5 -> Widerstand (220 Ohm) -> rote LED   -> GND
+Langes LED-Bein zum Widerstand, kurzes Bein zu GND.
+
+
+Alle Pins im Ueberblick
+-----------------------
+D2 / D3    Relais Schloss 1 / 2
+D4 / D5    LED gruen / rot  (Schiene 1)
+D6 / D7    LED gruen / rot  (Schiene 2)
+D8         Buzzer
+D9 - D13   RFID-Leser
+A0 / A1    Belegungssensor Schiene 1 / 2
+A2         Vibrationssensor
+D0 / D1    frei lassen (USB-Verbindung zum Pi)
+
+
+Karten freischalten
+-------------------
+1. Seriellen Monitor oeffnen (9600 Baud, "Neue Zeile")
+2. Karte dranhalten -> es kommt z. B. "CARD A34F12B9"
+3. Diese Nummer im Sketch bei ALLOWED[] eintragen
+   (gross geschrieben, ohne Leerzeichen)
+4. Neu hochladen
+
+
+Befehle im Seriellen Monitor (zum Testen)
+-----------------------------------------
+LED 1 GREEN   gruene LED an
+LED 1 RED     rote LED an
+LED 1 OFF     LEDs aus
+UNLOCK 1      Schloss 1 auf
+LOCK 1        Schloss 1 zu
+ALARM ON      Buzzer an
+ALARM OFF     Buzzer aus
+
+
+Wenn der Pi uebernimmt
+----------------------
+Im Sketch oben STANDALONE = false setzen.
+Dann meldet der Arduino nur noch "CARD ..." und der Pi entscheidet.
+
+
+Typische Fehler
+---------------
+- Kein COM-Port        -> falscher Treiber oder reines Ladekabel
+- Upload-Fehler        -> Prozessor auf "ATmega328P (Old Bootloader)"
+- LED leuchtet nicht   -> LED falsch herum, einfach umdrehen
+- Nano auf Breadboard  -> muss UEBER der Mittelrille stecken
